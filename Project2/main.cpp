@@ -58,7 +58,7 @@ int main(void)
 			Life--;
 	
 		// 결과 출력
-		cout << "레벨 " << Lv << "라이프 " << Life << endl;
+		cout << "레벨 " << Lv << "라이프 " << Life << endl; 
 
 		//승리여부
 		if (Lv == 4)
