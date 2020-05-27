@@ -4,71 +4,109 @@
 
 using namespace std;
 
-//타이핑게임
+#define  LVSTART 1
+#define  FIRSTLIFE 3
+#define  NULL 0
+#define  BUFF 20
+#define  FINISH 4
+#define  LV1 1
+#define  LV2 2
+#define  LV3 3
+#define  QUESTION1 0
+#define  QUESTION2 1
+#define  QUESTION3 2
+#define  PLAY 1
+#define  STOP 0
+
+struct Word {
+	const char* Question[BUFF] = { "가","나","다" };
+	
+};
+
+struct Init {
+	int Lv = LVSTART;
+	int Count = NULL;
+	int Life = FIRSTLIFE;
+	int Play = PLAY;
+
+	char* arr1 = new char[BUFF];
+	char* Inputword = arr1;
+
+	
+};
 
 
-/*
-struct Word{
-	const char* Question[] = { "가","나","다" };
+void QuestionOut(Init init,Word wd) {
+	if (init.Lv == LV1)
+		cout << "1번 문제 = " << wd.Question[QUESTION1] << endl;
+	if (init.Lv == LV2)
+		cout << "2번 문제 = " << wd.Question[QUESTION2] << endl;
+	if (init.Lv == LV3)
+		cout << "3번 문제 = " << wd.Question[QUESTION3] << endl;
+};
 
-} WD;
-*/
+int Check(Init init, Word wd ) {
+	if (strcmp(wd.Question[init.Count], init.Inputword) == NULL)
+	{
+		return 1;
+	}
+	else
+		return 0;
+	
+};
+void Result(Init init) {
+	if (init.Lv == FINISH)
+		cout << "승" << endl;
+	if (init.Life == NULL)
+		cout << "패" << endl;
+	
+};
+
+void Delete(Init* init) { delete init->arr1; };
+
 
 int main(void)
 {
 	//초기설정
+	Word wd;
+	Init init;
 	
-	char *Inputword = 0;
-	char *arr1 = new char[4];
-	Inputword = arr1;
-	int Lv = 1;
-	int Count = 0;
-	int Life = 3;
-	const char* Question[] = { "가","나","다" };
 
 	//초기화면
 	cout << "게임 시작 " << endl;
 
 
 	//반복
-	while (1)
+	while (init.Play)
 	{
 		Sleep(2000);
 		system("cls");
 		//보너스생성
 
 		//일반문제 단어 출력및 입력
-		if (Lv == 1)
-			cout << "1번 문제 = " << Question[0] << endl;
-		if (Lv == 2)
-			cout << "2번 문제 = " << Question[1] << endl;
-		if (Lv == 3)
-			cout << "3번 문제 = " << Question[2] << endl;
+		QuestionOut(init,wd);
 
 		//정답입력
-		cin >> Inputword;
+		cin >> init.Inputword;
+
 
 		//정답여부 판별후 정산
-		if (strcmp(Question[Count], Inputword) == 0)
-		{
-			Lv++;
-			Count++;
+		if (Check(init, wd)) {
+			init.Lv++;
+			init.Count++;
 		}
-		else
-			Life--;
-	
+		else 
+			init.Life--;
+
 		// 결과 출력
-		cout << "레벨 " << Lv << "라이프 " << Life << endl; 
+		cout << "레벨 " << init.Lv << " 라이프 " << init.Life << endl;
 
-		//승리여부
-		if (Lv == 4)
-			cout << "승" << endl;
-		if (Life == 0)
-			cout << "패" << endl;
+		//승리여부//라이프없음 죽음
+		Result(init);
+		if (init.Life == NULL || init.Lv == FINISH)
+			init.Play = STOP;
 
-		//라이프없음 죽음
-		if (Life == 0 || Lv == 4)
-			break;
+		
 
 		
 	//반복끝
@@ -76,8 +114,6 @@ int main(void)
 
 
 
-
-
-	delete []arr1;
-	return 0;
+	Delete( &init);
+	return NULL;
 }
