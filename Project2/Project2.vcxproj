@@ -138,7 +138,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Check.cpp" />
+    <ClCompile Include="Delete.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="QuestionOut.cpp" />
+    <ClCompile Include="Result.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Check.h" />
+    <ClInclude Include="Delete.h" />
+    <ClInclude Include="Init.h" />
+    <ClInclude Include="QuestionOut.h" />
+    <ClInclude Include="Result.h" />
+    <ClInclude Include="word.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

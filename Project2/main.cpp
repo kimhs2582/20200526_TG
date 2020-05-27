@@ -1,68 +1,12 @@
 #include <iostream>
 #include <windows.h>
-#include <string.h>
 
-using namespace std;
-
-#define  LVSTART 1
-#define  FIRSTLIFE 3
-#define  NULL 0
-#define  BUFF 20
-#define  FINISH 4
-#define  LV1 1
-#define  LV2 2
-#define  LV3 3
-#define  QUESTION1 0
-#define  QUESTION2 1
-#define  QUESTION3 2
-#define  PLAY 1
-#define  STOP 0
-
-struct Word {
-	const char* Question[BUFF] = { "가","나","다" };
-	
-};
-
-struct Init {
-	int Lv = LVSTART;
-	int Count = NULL;
-	int Life = FIRSTLIFE;
-	int Play = PLAY;
-
-	char* arr1 = new char[BUFF];
-	char* Inputword = arr1;
-
-	
-};
-
-
-void QuestionOut(Init init,Word wd) {
-	if (init.Lv == LV1)
-		cout << "1번 문제 = " << wd.Question[QUESTION1] << endl;
-	if (init.Lv == LV2)
-		cout << "2번 문제 = " << wd.Question[QUESTION2] << endl;
-	if (init.Lv == LV3)
-		cout << "3번 문제 = " << wd.Question[QUESTION3] << endl;
-};
-
-int Check(Init init, Word wd ) {
-	if (strcmp(wd.Question[init.Count], init.Inputword) == NULL)
-	{
-		return 1;
-	}
-	else
-		return 0;
-	
-};
-void Result(Init init) {
-	if (init.Lv == FINISH)
-		cout << "승" << endl;
-	if (init.Life == NULL)
-		cout << "패" << endl;
-	
-};
-
-void Delete(Init* init) { delete init->arr1; };
+#include "Init.h"
+#include "word.h"
+#include "QuestionOut.h"
+#include "Check.h"
+#include "Result.h"
+#include "Delete.h"
 
 
 int main(void)
@@ -105,14 +49,9 @@ int main(void)
 		Result(init);
 		if (init.Life == NULL || init.Lv == FINISH)
 			init.Play = STOP;
-
-		
-
 		
 	//반복끝
 	};
-
-
 
 	Delete( &init);
 	return NULL;
